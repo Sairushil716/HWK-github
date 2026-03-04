@@ -1,29 +1,50 @@
-from tkinter import *
+import pygame
 
-root=Tk()
-root.title("Number Pad")
-root.geometry("400x300")
+pygame.init()
 
 
+screen=pygame.display.set_mode((500,500))
+pygame.display.set_caption("My first Pygame programme!")
+gray=(58,58,58)
 
 
-lbl2=Label(root, text="Enter a number in cm",bg="#3895D3",fg="white")
-lbl2.pack()
+COLOR = (0, 0, 0)
+SURFACE_COLOR = (255, 255, 255)
+WIDTH = 500
+HEIGHT = 500
 
-textbox1=Entry(bg="#BEBEBE",fg="black")
-textbox1.pack()
-a=" "
-textbox1.insert(END,a)
+# Object class
+class Sprite(pygame.sprite.Sprite):
+    def __init__(self, color, height, width):
+        super().__init__()
+
+        self.image = pygame.Surface([width, height])
+        self.image.fill(SURFACE_COLOR)
+        self.image.set_colorkey(COLOR)
+
+        pygame.draw.rect(self.image,
+        color,
+        pygame.Rect(0, 0, width, height))
+
+        self.rect = self.image.get_rect()
+
+rectangle = Sprite((255,0,0), 20, 30)
+rectangle.rect.x = 200
+rectangle.rect.y = 300
+
+all_sprite_list = pygame.sprite.Group()
+all_sprite_list.add(rectangle)
 
 
+running=True
 
-def display():
-    x=int(textbox1.get())/2.5
-    lbl4=Label(root, text=x,bg="#3895D3",fg="white")
-    lbl4.pack()
-btn1=Button(text="Click",command=display, bg="red")
-btn1.pack()
+while running==True:
+    rectangle = Sprite((255,0,0), 20, 30)
+rectangle.rect.x = 200
+rectangle.rect.y = 300
+
+all_sprite_list = pygame.sprite.Group()
+all_sprite_list.add(rectangle)
 
 
-
-root.mainloop()
+pygame.quit()

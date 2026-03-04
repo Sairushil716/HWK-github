@@ -1,51 +1,38 @@
-from tkinter import *
+import pygame
 
-root=Tk()
-root.title("Login App")
-root.geometry("400x400")
+window=pygame.display.set_mode((400,400))
 
-frame=Frame(master=root,height=200,width=360,bg="#A00000")
-root=Tk()
-root.title("Info")
-#Size of the screen
-root.geometry("250x300")
-lbl2=Label(frame, text="Name",bg="#3895D3",fg="white",width=12)
-lbl3=Label(frame, text="Age",bg="#3895D3",fg="white",width=12)
-lbl4=Label(frame, text="Gender",bg="#3895D3",fg="white",width=12)
+window.fill((255,255,255))
 
-name_entry=Entry(frame)
-age_entry=Entry(frame)
-gender_entry=Entry(frame)
+GREEN=(0,255,0)
+BLACK=(0,0,0)
+x=0
+y=0
+pygame.draw.rect(window,GREEN,(100,100,100,100))
 
+pygame.draw.rect(window,BLACK,(100,100,50,10))
 
-def display():
-    name=name_entry.get()
-    greet="Hey "+name
-    message1="\nCongratulations for entering your details!"
-    message2="\nYou are {age_entry} years old!"
+pygame.display.update()
 
-    textbox.insert(END,greet)
-    textbox.insert(END,message1)
-    textbox.insert(END,message2)
+done=False
 
-textbox=Text(bg="#BEBEBE",fg="black")
-btn=Button(text="Create Account",command=display, bg="red")
+while not done:
+        for event in pygame.event.get():
+            if event.type ==pygame.QUIT:
+                done=True
+    
+        pressed=pygame.key.get_pressed()
+        if pressed[pygame.K_LEFT]: x-=3
+        if pressed[pygame.K_RIGHT]: x+=3
+        if pressed[pygame.K_UP]: y-=3
+        if pressed[pygame.K_DOWN]: y+=3
 
+        
 
-frame.place(x=20,y=0)
-lbl2.place(x=20,y=20)
-lbl3.place(x=20,y=80)
-lbl4.place(x=20,y=140)
+running = True
 
-name_entry.place(x=150,y=20)
-age_entry.place(x=150,y=80)
-gender_entry.place(x=150,y=140)
-btn.place(x=130,y=210)
-textbox.place(y=250)
-
-
-
-
-
-
-root.mainloop()
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+pygame.quit()
